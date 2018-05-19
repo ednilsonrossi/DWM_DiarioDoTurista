@@ -1,0 +1,56 @@
+Notas para desenvolvimento do "Diário do Turista"
+#################################################
+
+
+
+
+Objetivo do projeto:-
+    Desenvolver um app com o Framework Ionic que permite registrar pontos turísticos
+    visitados por um turista (qualquer pessoa). O sistema registra informações do
+    ponto turístico, armazena sua localização e também permite o registro fotográfico
+    do local. Mais detalhes do projeto estão disponíveis na Descrição do Projeto.
+
+
+SQLite
+#################################################
+
+1. Inclusão do SQLite no projeto
+
+    ionic cordova plugin add cordova-sqlite-storage
+    npm install --save @ionic-native/sqlite
+
+    Primeiro comando adiciona o plugin o segundo instala o plugin no projeto.
+
+
+2. Configurar o app
+
+    a) Em app.modules.ts:-
+
+    Os imports: 
+    import { MyApp } from './app.component';
+    import { HomePage } from '../pages/home/home';
+    import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+    
+    Os providers:
+    providers: [
+        StatusBar,
+        SplashScreen,
+        SQLite,
+        SQLiteObject,
+        {provide: ErrorHandler, useClass: IonicErrorHandler}
+    ]
+
+    b) No terminal criação de um provider para o banco de dados
+
+    ionic g provider database
+
+    
+3. Definu-se o scritp de criação do BD
+
+4. Iniciar a criação do BD quando o APP é iniciado
+
+    Em app.component.ts
+
+    Este módulo é executado antes da inicialização do app. Assim, no construtor doi inserida a 
+    funcionalidade que chama o provider do banco e executa sua criação.
+

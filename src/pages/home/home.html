@@ -7,5 +7,17 @@
 </ion-header>
 
 <ion-content padding>
-  
+  <ion-list>
+    <ion-item-sliding *ngFor="let ponto of pontos">
+      <button ion-item>
+        <h1>{{ponto.ponto_turistico}}</h1>
+        <h3>{{ponto.data_visita}}</h3>
+        <h3>{{ponto.descricao}}</h3>
+      </button>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="add()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
