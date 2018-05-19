@@ -6,9 +6,11 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { Geolocation } from '@ionic-native/geolocation'
 import { SQLite } from '@ionic-native/sqlite';
 import { DatabaseProvider } from '../providers/database/database';
 import { PontoTuristicoProvider } from '../providers/ponto-turistico/ponto-turistico';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { PontoTuristicoProvider } from '../providers/ponto-turistico/ponto-turis
     SQLite,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DatabaseProvider,
-    PontoTuristicoProvider
+    PontoTuristicoProvider,
+    Geolocation,
+    Camera
   ]
 })
 export class AppModule {}

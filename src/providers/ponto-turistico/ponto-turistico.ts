@@ -18,10 +18,11 @@ export class PontoTuristicoProvider {
   }
 
   public insert(ponto : PontoTuristico) {
+    
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'insert into ponto (ponto_turistico, descricao, data_visita, latitude, longitude) values (?, ?, ?, ?, ?)';
-        let data = [ponto.ponto_turistico, ponto.descricao, ponto.data_visita, ponto.latitude, ponto.longitude];
+        let sql = 'INSERT INTO PontoTuristico (ponto_turistico, descricao, data_visita, latitude, longitude, foto) values (?, ?, ?, ?, ?, ?)';
+        let data = [ponto.ponto_turistico, ponto.descricao, ponto.data_visita, ponto.latitude, ponto.longitude, ponto.foto];
 
         return db.executeSql(sql, data)
           .catch((e) => console.error(e));
@@ -32,7 +33,7 @@ export class PontoTuristicoProvider {
   public getAll() {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
-        let sql = 'SELECT * FROM ponto';
+        let sql = 'SELECT * FROM PontoTuristico';
         var data: any[];
   
         return db.executeSql(sql, data)

@@ -36,7 +36,11 @@ export class DatabaseProvider {
         // Criando as tabelas
         this.createTables(db);
 
-        this.insertDefaultItems(db);
+        /*
+        db.executeSql('INSERT INTO PontoTuristico (ponto_turistico, descricao, data_visita, latitude, longitude) VALUES ("IFSP", "Escola", "hoje", "0", "0")', {})
+          .then( () => console.log('Inserido'))
+          .catch(e => console.error('Erro ao inserir', e));
+        */
       })
       .catch(e => console.log(e));
 
@@ -50,33 +54,9 @@ export class DatabaseProvider {
    */
   private createTables(db: SQLiteObject) {
     // Criando as tabelas
-    db.sqlBatch([
-      ['CREATE TABLE IF NOT EXISTS ponto (id integer primary key AUTOINCREMENT NOT NULL, ponto_turistico TEXT, descricao TEXT, data_visita TEXT, latitude TEXT, longitude TEXT, foto TEXT)']
-    ])
+    db.executeSql('CREATE TABLE IF NOT EXISTS PontoTuristico (id integer primary key AUTOINCREMENT NOT NULL, ponto_turistico TEXT, descricao TEXT, data_visita TEXT, latitude TEXT, longitude TEXT, foto TEXT)', {})
       .then(() => console.log('Tabelas criadas'))
       .catch(e => console.error('Erro ao criar as tabelas', e));
   }
 
-  /**
-   * Incluindo os dados padrões
-   * @param db
-   */
-  private insertDefaultItems(db: SQLiteObject) {
-    db.executeSql('select COUNT(id) as qtd from categories', {})
-    .then((data: any) => {
-      //Se não existe nenhum registro
-      if (data.rows.item(0).qtd == 0) {
-
-        // Criando as tabelas
-        db.sqlBatch([
-          ['insert into ponto (ponto_turistico, descricao, data_visita, latitude, longitude) values (?, ?, ?, ?, ?)', 
-          ['Coxinhas Douradas', 'Bar do Freitas', 'hoje', '0', '0']]
-        ])
-          .then(() => console.log('Dados padrões incluídos'))
-          .catch(e => console.error('Erro ao incluir dados padrões', e));
-
-      }
-    })
-    .catch(e => console.error('Erro ao consultar a qtd de categorias', e));
-  }
 }

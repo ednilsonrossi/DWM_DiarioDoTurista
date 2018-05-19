@@ -13,7 +13,7 @@ export class HomePage {
 
 
   constructor(public navCtrl: NavController, private toast: ToastController, private pontoProvider: PontoTuristicoProvider) {
-      
+      this.getAllPontos();
   }
 
   ionViewDidEnter() {
@@ -28,6 +28,6 @@ export class HomePage {
   }
 
   add(){
-    
+    this.navCtrl.push('NovoPontoPage');
   }
 }
