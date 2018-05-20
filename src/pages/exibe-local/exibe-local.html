@@ -1,0 +1,24 @@
+<!--
+  Generated template for the ExibeLocalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Eu visitei!</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h1>Local: {{ponto.ponto_turistico}}</h1>
+  <h3>Descrição:</h3>
+  <p>{{ponto.descricao}}</p>
+  <p><b>Visitado em:</b> {{ponto.data_visita}}</p>
+  <img [src]="ponto.foto" *ngIf="ponto.foto" />
+  <button ion-button (click)="abrirMapa(ponto.id)">Ver Local</button>
+  <button ion-button (click)="delete()">Apagar</button>
+</ion-content>

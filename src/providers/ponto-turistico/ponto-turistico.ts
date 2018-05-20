@@ -30,6 +30,35 @@ export class PontoTuristicoProvider {
       .catch((e) => console.error(e));
   }
 
+  public get(id:number){
+    return this.dbProvider.getDB()
+      .then((db:SQLiteObject) => {
+        let sql = 'select * from PontoTuristico where id = ?';
+        let data = [id];
+
+        return db.executeSql(sql, data)
+          .then((data:any) => {
+            if(data.rows.length > 0){
+              let item = data.rows.item(0);
+              let p = new PontoTuristico();
+              p.data_visita = item.data_visita;
+              p.descricao = item.descricao;
+              p.foto = item.foto;
+              p.id = item.id;
+              p.latitude = item.latitude;
+              p.longitude = item.longitude;
+              p.ponto_turistico = item.ponto_turistico;
+
+              return p;
+            }
+
+            return null;
+          })
+          .catch((e) => console.error(e));
+      })
+      .catch((e) => console.error(e));
+  }
+
   public getAll() {
     return this.dbProvider.getDB()
       .then((db: SQLiteObject) => {
@@ -49,6 +78,18 @@ export class PontoTuristicoProvider {
               return [];
             }
           })
+          .catch((e) => console.error(e));
+      })
+      .catch((e) => console.error(e));
+  }
+
+  public delete(id : number){
+    return this.dbProvider.getDB()
+      .then((db:SQLiteObject) => {
+        let sql = 'delete from PontoTuristico where id = ?';
+        let data = [id];
+
+        return db.executeSql(sql, data)
           .catch((e) => console.error(e));
       })
       .catch((e) => console.error(e));
