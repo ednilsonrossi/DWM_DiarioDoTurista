@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
+
+import { PontoTuristicoProvider, PontoTuristico} from '../../providers/ponto-turistico/ponto-turistico';
 
 @Component({
   selector: 'page-home',
@@ -7,8 +9,29 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  pontos:any[] = [];
 
+
+  constructor(public navCtrl: NavController, private toast: ToastController, private pontoProvider: PontoTuristicoProvider) {
+      //this.getAllPontos();
   }
 
+  ionViewDidEnter() {
+    this.getAllPontos();
+  }
+
+  getAllPontos() {
+    this.pontoProvider.getAll()
+      .then((result: any[]) => {
+        this.pontos = result;
+      });
+  }
+
+  add(){
+    this.navCtrl.push('NovoPontoPage');
+  }
+
+  public exibe(id : number){
+    this.navCtrl.push('ExibeLocalPage', {id:id});
+  }
 }

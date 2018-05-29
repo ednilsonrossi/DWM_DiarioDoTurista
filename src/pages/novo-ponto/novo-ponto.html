@@ -1,0 +1,33 @@
+<!--
+  Generated template for the NovoPontoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Novo Ponto Turístico</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="formulario" (submit)="salvar()">
+    <p>Hoje: {{hoje}}</p>
+    <ion-item>
+      <ion-input type="text" formControlName="titulo" placeholder="Nome do ponto turistico"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea formControlName="descricao" placeholder="Breve descrição sobre o local."></ion-textarea>
+    </ion-item>
+    <p>Localização</p>
+    <p>Latitude: {{ponto.latitude}}</p>
+    <p>Longitude: {{ponto.longitude}}</p>
+    <button ion-button *ngIf="temFoto">Enviar</button>
+  </form>
+  <button ion-button (click)="tiraFoto()">Adicionar Foto</button>
+  <h2>A foto: </h2>
+  <img [src]="imagem" *ngIf="imagem" />
+</ion-content>

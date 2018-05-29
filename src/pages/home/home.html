@@ -1,14 +1,23 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Diário do Turista
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <ion-list>
+    <ion-item-sliding *ngFor="let ponto of pontos">
+      <button ion-item (click)="exibe(ponto.id)">
+        <h1>{{ponto.ponto_turistico}}</h1>
+        <h6 align="right">{{ponto.data_visita}}</h6>
+        <h3>{{ponto.descricao}}</h3>
+      </button>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab right bottom>
+    <button ion-fab color="light" (click)="add()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
 </ion-content>
